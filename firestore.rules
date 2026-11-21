@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isOperator() { return signedIn() && request.auth.token.email == 'operator@iw-demo.example'; }
+    function isApprover() { return signedIn() && request.auth.token.email == 'approver@iw-demo.example'; }
+
+    match /{document=**} { allow read: if signedIn(); }
+
+    match /commands/{id} {
+      allow create: if isOperator()
+        && request.resource.data.keys().hasOnly(['scenario', 'note', 'status', 'created_at'])
+        && request.resource.data.scenario in ['baseline', 'clean', 'poisoned', 'swap', 'insider', 'judge']
+        && request.resource.data.status == 'NEW'
+        && (!('note' in request.resource.data) || request.resource.data.note.size() <= 500);
+    }
+    match /config/layers {
+      allow update: if isOperator()
+        && request.resource.data.keys().hasOnly(['hidden_text', 'model_armor', 'quarantine', 'jailbreak_controller']);
+    }
+    match /approvals/{id} {
+      allow update: if isApprover()
+        && resource.data.status == 'PENDING'
+        && request.resource.data.status in ['APPROVED', 'REJECTED']
+        && request.resource.data.decided_by == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'decided_by', 'decided_at']);
+    }
+    match /baseline_confirmations/{id} {
+      allow update: if isApprover()
+        && resource.data.status == 'PENDING'
+        && request.resource.data.status in ['CONFIRMED', 'CANCELLED']
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'decided_at']);
+    }
+  }
+}
