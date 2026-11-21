@@ -1,0 +1,12 @@
+identities:
+  controller:   [get_invoice, verify_invoice, request_payment, place_hold, raise_alert]
+  investigator: [get_invoice, verify_invoice, get_payment_history, place_hold, raise_alert]
+  onboarding:   [raise_alert]
+revoke_after_unauthorized: 2
+payment_limit_cents: 2500000
+approval_ttl_seconds: 300
+rules:  # deny code: CEL expression that must be true to pass
+  IBAN_MISMATCH:        "iban_checksum_ok && req.iban == vendor.iban && req.iban == invoice.iban"
+  AMOUNT_MISMATCH:      "req.amount_cents == invoice.amount_cents && req.amount_cents <= po.remaining_cents && req.amount_cents <= limit_cents"
+  DUPLICATE:            "!already_paid_or_pending"
+  INVOICE_NOT_VERIFIED: "invoice.status == 'VERIFIED'"

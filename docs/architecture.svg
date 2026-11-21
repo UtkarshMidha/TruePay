@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 500" width="1240" height="500" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8a97a3"/></marker>
+    <style>
+      .b{fill:#fff;stroke:#d5dbe1;stroke-width:1.2}
+      .t{font-size:16px;font-weight:600;fill:#0f2a38}
+      .s{font-size:12.5px;fill:#66737f}
+      .k{font-size:11px;font-weight:600;fill:#2a6a85;letter-spacing:.06em}
+      .l{stroke:#8a97a3;stroke-width:1.4;fill:none;marker-end:url(#a)}
+    </style>
+  </defs>
+  <rect width="1240" height="500" fill="#f7f9fb"/>
+  <text x="40" y="48" font-size="22" font-weight="700" fill="#0f2a38">TruePay</text>
+  <text x="40" y="70" class="s">Agents decide. Code enforces. Humans approve.</text>
+
+  <!-- row 1 -->
+  <rect class="b" x="40" y="130" width="160" height="96" rx="14" style="stroke:#d64541"/>
+  <text class="t" x="60" y="166">Invoice</text><text class="s" x="60" y="188">Untrusted PDF</text><text class="s" x="60" y="206">hidden text, fake IBAN</text>
+
+  <rect class="b" x="250" y="130" width="160" height="96" rx="14"/>
+  <text class="k" x="270" y="154">L1 · L2 · L3</text><text class="t" x="270" y="178">Intake</text><text class="s" x="270" y="200">Scan, filter, quarantine</text>
+
+  <rect class="b" x="460" y="130" width="160" height="96" rx="14"/>
+  <text class="t" x="480" y="166">Controller</text><text class="s" x="480" y="188">Gemini · PAY, HOLD or</text><text class="s" x="480" y="206">INVESTIGATE</text>
+
+  <rect x="670" y="130" width="160" height="96" rx="14" fill="#133d50"/>
+  <text class="k" x="690" y="154" fill="#9fd0e3" style="fill:#9fd0e3">L5</text><text class="t" x="690" y="178" style="fill:#fff">paygate</text><text class="s" x="690" y="200" style="fill:#b9cfda">Action Firewall</text>
+
+  <rect class="b" x="880" y="130" width="160" height="96" rx="14"/>
+  <text class="k" x="900" y="154">L6</text><text class="t" x="900" y="178">Approval</text><text class="s" x="900" y="200">Signed, single-use</text>
+
+  <rect class="b" x="1090" y="130" width="120" height="96" rx="14"/>
+  <text class="t" x="1110" y="172">Bank</text><text class="s" x="1110" y="194">simulated</text>
+
+  <path class="l" d="M200 178H248"/><path class="l" d="M410 178H458"/><path class="l" d="M620 178H668"/>
+  <path class="l" d="M830 178H878"/><path class="l" d="M1040 178H1088"/>
+
+  <!-- row 2 -->
+  <rect class="b" x="250" y="300" width="160" height="96" rx="14" stroke-dasharray="5 4"/>
+  <text class="k" x="270" y="324">L4 · A2A</text><text class="t" x="270" y="348">Vendor agent</text><text class="s" x="270" y="370">Müller's own server</text>
+
+  <rect class="b" x="460" y="300" width="160" height="96" rx="14"/>
+  <text class="t" x="480" y="342">Investigator</text><text class="s" x="480" y="364">Gemini · calls vendor</text>
+
+  <rect class="b" x="670" y="300" width="160" height="96" rx="14"/>
+  <text class="t" x="690" y="342">Sheets</text><text class="s" x="690" y="364">Vendor master, audit</text>
+
+  <path class="l" d="M540 226V298"/>
+  <path class="l" d="M460 348H412"/>
+  <path class="l" d="M620 348H645V212H668"/>
+  <path class="l" d="M750 226V298"/>
+
+  <!-- event bus -->
+  <rect x="40" y="438" width="1170" height="38" rx="12" fill="#eaf0f4"/>
+  <text x="64" y="462" class="s" style="fill:#3c4d59"><tspan font-weight="600">Firestore</tspan> event bus · every step emits one event · the web UI reads events and writes only commands</text>
+</svg>

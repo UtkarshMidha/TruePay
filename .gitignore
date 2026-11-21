@@ -1,0 +1,17 @@
+.env
+sa.json
+*.json.key
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+app/build/
+app/.dart_tool/
+app/.flutter-plugins*
+.firebase/
+backend/fixtures/out/
+app/firebase.web.json
+*-debug.log
+UI.pdf
+app/demo_accounts.json
+audit_ledger.csv
